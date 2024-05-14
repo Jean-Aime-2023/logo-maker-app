@@ -1,7 +1,8 @@
 import { Image, PencilRuler, Shield } from "lucide-react"
 import { useState } from "react"
 
-const SideNav = () => {
+// eslint-disable-next-line react/prop-types
+const SideNav = ({selectedIndex}) => {
     const menuList = [
         {
             id: 1,
@@ -25,7 +26,8 @@ const SideNav = () => {
         <div className="border shadow-sm h-screen">
             <div>
                 {menuList.map((menu, index) => (
-                    <h2 onClick={()=>setActiveIndex(index)} key={index} className={`p-3 text-lg flex items-center gap-2 px-7 text-gray-500 my-2 cursor-pointer hover:bg-primary hover:text-white
+                    <h2 onClick={()=>{setActiveIndex(index);
+                        selectedIndex(index)}} key={index} className={`p-3 text-lg flex items-center gap-2 px-7 text-gray-500 my-2 cursor-pointer hover:bg-primary hover:text-white
                      ${activeIndex == index && 'bg-primary text-white'}
                     `}>
                         <menu.icon/>
