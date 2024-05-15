@@ -5,6 +5,7 @@ import { Slider } from "@/components/ui/slider"
 import { useContext, useEffect, useState } from "react"
 import ColorPickerController from "./ColorPickerController"
 import { UpdateStorageContext } from "@/context/UpdateStorageContext"
+import IconList from "./IconList"
 
 const IconController = () => {
   let storageValue;
@@ -38,8 +39,7 @@ const IconController = () => {
   return (
     <div>
       <div>
-        <label>Icon</label>
-        <div className="p-3 cursor-pointer bg-gray-200 rounded-md w-[50px] h-[50px] flex items-center justify-center my-2"><Smile /></div>
+        <IconList/>
         <div className="p-2">
           <label className="p-2 flex justify-between items-center">Size <span>{size} px</span> </label>
           <Slider defaultValue={[size]} max={512} step={1} onValueChange={(event) => setSize(event[0])} />
