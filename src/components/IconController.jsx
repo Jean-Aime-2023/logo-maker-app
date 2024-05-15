@@ -1,6 +1,52 @@
+import { Smile } from "lucide-react"
+import { Slider } from "@/components/ui/slider"
+import { useEffect, useState } from "react"
+import ColorPickerController from "./ColorPickerController"
+
 const IconController = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [size, setSize] = useState(280)
+  const [rotate, setRotate] = useState(0)
+  // eslint-disable-next-line no-unused-vars
+  const [color, setColor] = useState('#fff')
+  let storageValue;
+  try {
+    storageValue = JSON.parse(localStorage.getItem('value'));
+  } catch (error) {
+    console.error('Error parsing localStorage value:', error);
+    storageValue = {};
+  }
+
+  useEffect(() => {
+    const updatedValue = {
+      ...storageValue,
+      iconsSize: size,
+      iconRotate: rotate,
+      iconColor: color,
+      icon: 'Smile'
+    }
+    localStorage.setItem('value', JSON.stringify(updatedValue))
+  }, [size, rotate, color])
+
   return (
-    <div>IconController</div>
+    <div>
+      <div>
+        <label>Icon</label>
+        <div className="p-3 cursor-pointer bg-gray-200 rounded-md w-[50px] h-[50px] flex items-center justify-center my-2"><Smile /></div>
+        <div className="p-2">
+          <label className="p-2 flex justify-between items-center">Size <span>{size} px</span> </label>
+          <Slider defaultValue={[280]} max={512} step={1} onValueChange={(event) => setSize(event[0])} />
+        </div>
+        <div className="p-2">
+          <label className="p-2 flex justify-between items-center">Rotate <span>{rotate} ° </span> </label>
+          <Slider defaultValue={[0]} max={360} step={1} onValueChange={(event) => setRotate(event[0])} />
+        </div>
+        <div className="p-2">
+          <label className="p-2 flex justify-between items-center">Icon color</label>
+          <ColorPickerController hideController={true} selectedColor={(color) => setColor(color)} />
+        </div>
+      </div>
+    </div>
   )
 }
 
