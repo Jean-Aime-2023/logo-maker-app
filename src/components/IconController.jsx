@@ -26,7 +26,7 @@ const IconController = () => {
       icon: 'Smile'
     }
     localStorage.setItem('value', JSON.stringify(updatedValue))
-  }, [size, rotate, color])
+  }, [size, rotate, color, storageValue])
 
   return (
     <div>
