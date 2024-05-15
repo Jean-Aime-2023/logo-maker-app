@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import { Smile } from "lucide-react"
 import { Slider } from "@/components/ui/slider"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import ColorPickerController from "./ColorPickerController"
+import { UpdateStorageContext } from "@/context/UpdateStorageContext"
 
 const IconController = () => {
   // eslint-disable-next-line no-unused-vars
@@ -16,6 +19,7 @@ const IconController = () => {
     console.error('Error parsing localStorage value:', error);
     storageValue = {};
   }
+  const {updateStorage,setUpdateStorage} = useContext(UpdateStorageContext)
 
   useEffect(() => {
     const updatedValue = {
@@ -25,6 +29,7 @@ const IconController = () => {
       iconColor: color,
       icon: 'Smile'
     }
+    setUpdateStorage(updatedValue)
     localStorage.setItem('value', JSON.stringify(updatedValue))
   }, [size, rotate, color, storageValue])
 
