@@ -6,10 +6,6 @@ import ColorPickerController from "./ColorPickerController"
 import { UpdateStorageContext } from "@/context/UpdateStorageContext"
 
 const BackgroundController = () => {
-  const [rounded,setRounded] = useState(0)
-  const [padding,setPadding] = useState(0)
-  // eslint-disable-next-line no-unused-vars
-  const [color,setColor] = useState('#e84747')
   let storageValue;
   try {
     storageValue = JSON.parse(localStorage.getItem('value'));
@@ -17,6 +13,12 @@ const BackgroundController = () => {
     console.error('Error parsing localStorage value:', error);
     storageValue = {};
   }
+
+  const [rounded,setRounded] = useState(storageValue?storageValue?.bgRounded:0)
+  const [padding,setPadding] = useState(storageValue?storageValue?.bgPadding:0)
+  // eslint-disable-next-line no-unused-vars
+  const [color,setColor] = useState(storageValue?storageValue?.bgColor:'#e84747')
+  
   const {updateStorage,setUpdateStorage} = useContext(UpdateStorageContext)
   useEffect(()=>{
     const updatedValue={
